@@ -28,7 +28,7 @@ namespace GestionAlcancias.Controllers
         private readonly IConfiguration _configuration;
         private readonly HttpClient ApiClient;
 
-//Hola se actualizar 55555
+//Hola, sé actualizar: 55555.
         public UsuarioController(ILogger<UsuarioController> logger, MiAppContext dbContext, IConfiguration configuration)
         {
             _logger = logger;
