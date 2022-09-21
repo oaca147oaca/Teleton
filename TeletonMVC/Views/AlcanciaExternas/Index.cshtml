@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Dominio.EntidadesDeNegocio.AlcanciaExterna>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Listado de Alcancías Externas</h1>
+
+<p class="text-right">
+    <a asp-action="Create">Devolver Alcancía Externa</a>
+</p>
+
+@if (TempData["Status"] != null)
+{
+
+    if ((bool)TempData["Status"] == true)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensaje"].ToString()
+        </div>
+    }
+    else if ((bool)TempData["Status"] == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Mensaje"].ToString()
+        </div>
+    }
+}
+
+<input type="text" id="myInput" placeholder="Filtrar..." class="form-control" />
+<br />
+<table class="table table-dark table-hover text-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAlcExt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDevolucion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoPesos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoDolares)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroTicket)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdAlcExt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.ValueFor(modelItem => item.FechaDevolucion, "{0:dd/MM/yyyy}")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoPesos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoDolares)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroTicket)
+                </td>
+
+                <td>
+
+                    <a asp-action="Edit" asp-route-id="@item.IdAlcExt"><i class="fa-solid fa-pen"></i> </a> |
+                    <a asp-action="Details" asp-route-id="@item.IdAlcExt"><i class="fa-solid fa-info"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdAlcExt" onclick="return confirm('Eliminar Alcancía @item.IdAlcExt ?')"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+   
+
+
+<script src="~/js/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

@@ -1,0 +1,84 @@
+﻿@model Dominio.Colaborador
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row justify-content-center align-items-center ">
+    <div class="col-md-4 border" style="background-color: #454d55; padding: 10px">
+        <h4 class="text-center text-danger">Donante: Editar</h4>
+
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+        }
+        <hr style="border-top: 1px solid white;" />
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label text-white"></label>
+                <input asp-for="Nombre" class="form-control" disabled />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RazonSocial" class="control-label text-white">Razón Social</label>
+                <input asp-for="RazonSocial" class="form-control" disabled/>
+                <span asp-validation-for="RazonSocial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label text-white"></label>
+                <input asp-for="Direccion" class="form-control"disabled />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Departamento" class="control-label text-white"></label>
+                <input asp-for="Departamento" class="form-control" disabled/>
+                <span asp-validation-for="Departamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Localidad" class="control-label text-white"></label>
+                <input asp-for="Localidad" class="form-control" disabled/>
+                <span asp-validation-for="Localidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoColId" class="control-label text-white">Tipo de Donante</label>
+                <input asp-for="TipoCol.Nombre" class="form-control" disabled />
+                <input asp-for="TipoColId" class="form-control" hidden />
+                <label class="control-label text-white">Si desea cambiar:</label>
+                <select name="SelTipoCol" class="form-control">
+                    <option disabled selected="selected">Seleccione una opción...</option>
+                    @for (int i = 0; i < ViewBag.TiposCols.Count; i++)
+                    {
+                        <option value="@ViewBag.TiposCols[i].Id">@ViewBag.TiposCols[i].Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="TipoColId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-danger" />
+            </div>
+        </form>
+        <div class="align-content-end text-right">
+            <a asp-action="MostrarTodosCols" class="text-danger">Volver al listado</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

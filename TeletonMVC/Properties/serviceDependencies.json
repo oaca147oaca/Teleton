@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "apis1": {
+      "type": "apis"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Server=tcp:alcancias.database.windows.net,1433;InitialCatalog=AlcanciasBD;PersistSecurityInfo=False;UserID=teleton;Password=Telet@n_2022;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+﻿@model Dominio.EntidadesDeNegocio.AlcanciaExterna
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="container">
+    <h4 class="text-center">Alcancía Externa: Detalles</h4>
+    <div class="p-3 mb-2 bg-secondary text-white">Id alcancía: @Html.DisplayFor(model => model.IdAlcExt)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Campaña: @Html.DisplayFor(model => model.Campania.Nombre)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Nombre: @Html.DisplayFor(model => model.Nombre)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Telefono: @Html.DisplayFor(model => model.Telefono)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Fecha: @Html.DisplayFor(model => model.FechaDevolucion)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Monto Pesos: @Html.DisplayFor(model => model.MontoPesos)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Monto Dolares: @Html.DisplayFor(model => model.MontoDolares)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Monto Pesos: @Html.DisplayFor(model => model.MontoPesos)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Recibo: @Html.DisplayFor(model => model.NumeroTicket)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Impreso: @Html.DisplayFor(model => model.Impreso)</div>
+    <div class="align-content-end text-right">
+        <a asp-action="Index">Volver al listado </a>
+    </div>
+</div>

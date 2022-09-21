@@ -1,0 +1,83 @@
+﻿@model Dominio.Alcancia
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row justify-content-center align-items-center ">
+    <div class="col-md-4 border" style="background-color: #454d55; padding: 10px">
+        <h4 class="text-center text-danger">Alcancía: Editar</h4>
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+        }
+        <hr style="border-top: 1px solid white;" />
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdAlcancia" />
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label text-white"></label>
+                <input asp-for="Estado" class="form-control" disabled />
+            </div>
+            @if (Model.Estado == "CONTABILIZADA")
+            {
+
+                <div class="form-group">
+                    <label class="control-label text-white">Si desea cambiarlo</label><br />
+                    <select name="SelEst" class="form-control">
+                        <option disabled selected="selected" value="0">Seleccione una opción...</option>
+                        <option value="1">Disponible</option>
+                        <option value="2">Entregada</option>
+                        <option value="3">Recibida</option>
+                        <option value="4">Contabilizada</option>
+                        <option value="5">Desvinculada</option>
+                    </select>
+                </div>
+            }
+            <div class="form-group">
+                <label class="control-label text-white">Fecha Alta</label>
+                <input asp-for="FechaAlta" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Habilitada" class="control-label text-white"></label>
+                <input asp-for="Habilitada" class="form-control" disabled />
+            </div>
+            @if (Model.Estado == "CONTABILIZADA")
+            {
+                <div class="form-group">
+                    <label class="control-label text-white">Si desea cambiarlo</label><br />
+                    <select name="SelHab" class="form-control">
+                        <option disabled selected="selected" value="0">Seleccione una opción...</option>
+                        <option value="1">Habilitada</option>
+                        <option value="2">No habilitada</option>
+
+                    </select>
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-danger" />
+            </div>
+        </form>
+        <div class="align-content-end text-right">
+            <a asp-action="MostrarAlcancias" class="text-danger">Volver al listado</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

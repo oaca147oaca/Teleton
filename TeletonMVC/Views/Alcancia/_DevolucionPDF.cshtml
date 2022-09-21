@@ -1,0 +1,110 @@
+﻿@model Dominio.Solicitud
+
+@{
+    Layout = null;
+}
+
+
+@functions{
+    public string GetSol()
+    {
+        ViewBag.Solicitud = (Dominio.Solicitud)TempData["Solicitud"];
+        ViewBag.Fecha = DateTime.Today.Year;
+        return string.Empty;
+    }
+}
+<style>
+    h1 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 15px;
+        margin: 5px;
+    }
+
+    .listado {
+        border: 1px solid black;
+        width: 100%;
+        margin-bottom: 10px
+    }
+</style>
+
+<div id="divImprimir1">
+
+    <h1><b>DEVOLUCIÓN DE ALCANCÍAS TELETÓN  @ViewBag.Fecha</b></h1>
+    @GetSol()
+    <p><b>FECHA DE DEVOLUCIÓN:</b> @DateTime.Now.ToString("dd/MM/yyyy")</p>
+    <p><b>@ViewBag.Solicitud.Colaborador.TipoCol.Nombre.ToUpper():</b> @ViewBag.Solicitud.Colaborador.Nombre</p>
+    <p><b>RESPONSABLE:</b>@ViewBag.Solicitud.Responsable.Nombre</p>
+    <p><b>N° DOCUMENTO:</b>  @ViewBag.Solicitud.Responsable.Cedula</p>
+    <p><b>CANTIDAD:</b>  @ViewBag.Solicitud.CantDevueltas</p>
+
+    @for (int i = 0; i < ViewBag.Solicitud.AlcanciasSolicitudes.Count; i++)
+    {
+        if (ViewBag.Solicitud.AlcanciasSolicitudes[i].Alcancia.Estado == "RECIBIDA")
+        {
+            if (ViewBag.Solicitud.AlcanciasSolicitudes.Count - 1 != i)
+            {
+                ViewBag.alc += ViewBag.Solicitud.AlcanciasSolicitudes[i].IdAlcancia + ", ";
+            }
+            else
+            {
+                ViewBag.alc += ViewBag.Solicitud.AlcanciasSolicitudes[i].IdAlcancia + ".";
+            }
+        }
+    }
+
+    <p><b>ALCANCÍAS</b>: @ViewBag.alc</p>
+    <br />
+    <br />
+    <p><b>El firmante declara en conformidad haber devuelto las alcancías enumerdadas en el día de la fecha.</b></p>
+    <br />
+    <br />
+    <br />
+    <p><b>FIRMA:_____________________          ACLARACIÓN:_____________________</b></p><br /><br /><br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <h1><b>DEVOLUCIÓN DE ALCANCÍAS TELETÓN @ViewBag.Fecha</b></h1>
+    <p>Fecha: @DateTime.Now.ToString("dd/MM/yyyy")</p>
+    <p>Cantidad de alcancías devueltas:  @ViewBag.Solicitud.CantDevueltas</p>
+    <p>Por este medio la Fundación Teletón, deja constancia que han sido devueltas las siguientes alcancias:</p>
+    <br />
+    <p>@ViewBag.alc</p>
+    <p><b>Le sugerimos conserve este documento en calidad de comprobante.</b></p>
+    <br />
+    <br />
+    <p><b>Muchas gracias por su colaboración en la campaña @ViewBag.Fecha.</b></p>
+    <p><b>#ContigoEsPosible !!</b></p>
+</div>

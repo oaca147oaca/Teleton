@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Dominio.Colaborador>
+
+@{
+    ViewData["Title"] = "MostrarTodosCols";
+}
+
+<h1 class="text-center">Listado de Donantes</h1>
+
+
+@if (TempData["Status"] != null)
+{
+
+    if ((bool)TempData["Status"] == true)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensaje"]
+        </div>
+    }
+    else if (ViewBag.Status == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Mensaje"]
+        </div>
+    }
+}
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-dismissible fade show alert-danger" role="alert">
+        @ViewBag.Mensaje
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<input type="text" id="myInput" placeholder="Filtrar..." class="form-control"/><br />
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.RazonSocial)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Departamento)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Localidad)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.TipoCol)
+            </th>
+            <th class="text-white"></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RazonSocial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Localidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoCol.Nombre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen"></i></a> |
+
+                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-info"></i></a> |
+
+                    <a asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Eliminar Donador @item.Nombre ?')"><i class="fa-solid fa-trash-can"></i></a> |
+
+                    <a asp-action="VerResponsablesDeCol" asp-controller="Responsable" asp-route-id="@item.Id">Responsable</a> |
+
+                    <a asp-action="VerRetirosDeCol" asp-controller="Retira" asp-route-id="@item.Id">Retiros</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

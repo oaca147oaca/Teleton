@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Dominio.EntidadesDeNegocio.Voluntario>
+
+@{
+    ViewData["Title"] = "AuditoriaVoluntarios";
+}
+
+<h1 class="text-center">Auditoria de Voluntarios</h1>
+
+<input type="text" id="myInput" placeholder="Filtrar..." class="form-control" />
+<br />
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Cedula)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Inicio)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Fin)
+            </th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fin)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/js/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

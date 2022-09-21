@@ -1,0 +1,72 @@
+﻿@model Dominio.Solicitud
+
+@{
+    ViewData["Title"] = "CreatePreSol";
+}
+
+
+<div class="row justify-content-center align-items-center ">
+    <div class="col-md-4 border">
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+        }
+        <h4>Crear Pre-Solicitud</h4>
+        <hr />
+        <form asp-action="CrearPreSol">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Id" class="form-control" value="@ViewBag.Solicitud.Id" hidden />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Colaborador" class="control-label"><b>Donante:</b></label>
+                <input asp-for="ColaboradorId" class="form-control" value="@ViewBag.Col.Id" hidden />
+                <span> @ViewBag.Col.Nombre</span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ResponsableId" class="control-label"><b>Responsable:</b></label>
+                <input asp-for="ResponsableId" class="form-control" value="@ViewBag.Resp.Id" hidden />
+                <span> @ViewBag.Resp.Nombre</span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RetiraId" class="control-label"><b>Retira:</b></label>
+                <input asp-for="RetiraId" class="form-control" value="@ViewBag.Ret.Id" hidden />
+                <span> @ViewBag.Ret.Nombre</span>
+            </div>
+            <div>
+
+                <div class="form-group">
+                    <label asp-for="CantSolicitadas" type="number" class="control-label">Cantidad Solicitadas</label>
+                    <input asp-for="CantSolicitadas" class="form-control" type="number" min="1" required />
+                    <span asp-validation-for="CantSolicitadas" class="text-danger"></span>
+                </div>
+            </div>
+            <hr />
+
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-danger" />
+            </div>
+        </form>
+        <div class="align-content-end text-right">
+            <a asp-action="MostrarPreSols">Ir al Listado</a>
+        </div>
+    </div>
+</div>
+
+
+

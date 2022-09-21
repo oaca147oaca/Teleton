@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/TeletonMVCApi/apis/TeletonWebAPI",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/alcancias/databases/AlcanciasBD",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:Server=tcp:alcancias.database.windows.net,1433;InitialCatalog=AlcanciasBD;PersistSecurityInfo=False;UserID=teleton;Password=Telet@n_2022;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

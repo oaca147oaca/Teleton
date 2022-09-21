@@ -1,0 +1,23 @@
+﻿@model Dominio.Solicitud
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="container">
+    <h4 class="text-center">Solicitud: Detalles</h4>
+    <div class="p-3 mb-2 bg-secondary text-white">Campaña: @Html.DisplayFor(model => model.Campania.Nombre)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Departamento: @Html.DisplayFor(model => model.Colaborador.Departamento)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Responsable: @Html.DisplayFor(model => model.Responsable.Cedula)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Retira: @Html.DisplayFor(model => model.Retira.Cedula)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Cantidad Solicitadas: @Html.DisplayFor(model => model.CantSolicitadas)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Cantidad Entregadas: @Html.DisplayFor(model => model.CantEntregadas)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Cantidad Devueltas: @Html.DisplayFor(model => model.CantDevueltas)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Lugar Entrega: @Html.DisplayFor(model => model.LugarEntrega)</div>
+
+    <div class="align-content-end text-right">
+        <a asp-action="MostrarTodasSols">Volver al listado </a>
+    </div>
+</div>
+

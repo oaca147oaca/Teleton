@@ -1,0 +1,63 @@
+﻿@model Dominio.Campania
+
+@{
+    ViewData["Title"] = "AltaCampania";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-4 border">
+        <h4>Campaña: Crear</h4>
+
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+        }
+        <hr />
+        <form asp-action="AltaCampania">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Nombre:</label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fecha Inicio:</label>
+                <input asp-for="FechaInicio" class="form-control" />
+                <span asp-validation-for="FechaInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fecha Fin Montevideo:</label>
+                <input asp-for="FechaFinMVD" class="form-control" />
+                <span asp-validation-for="FechaFinMVD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fecha Fin Fray Bentos:</label>
+                <input asp-for="FechaFinFB" class="form-control" />
+                <span asp-validation-for="FechaFinFB" class="text-danger"></span>
+            </div>
+            <div class="form-group align-content-end">
+                <input type="submit" value="Crear" class="btn btn-danger" />
+            </div>
+        </form>
+        <div class="align-content-end text-right">
+            <a asp-action="ListadoCampanias">Volver al Listado</a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

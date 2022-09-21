@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Dominio.Semaforo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Devoluciones pendientes</h1>
+
+@if (TempData["Mensaje"] != null)
+{
+    if ((bool)TempData["Status"] == true)
+    {
+        <div class="alert alert-dismissible fade show alert-success" role="alert">
+            @TempData["Mensaje"].ToString()
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-dismissible fade show alert-danger" role="alert">
+            @TempData["Mensaje"].ToString()
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Colaborador)
+            </th>
+            <th class="text-white text-center">
+                Cant. devueltas
+            </th>
+            <th class="text-white text-center">
+                Cant. sin devolver
+            </th>
+            <th class="text-white text-center">
+                @Html.DisplayNameFor(model => model.TotalCampanias)
+            </th>
+            <th class="text-white text-center">Color</th>
+            <th class="text-white"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Colaborador.Nombre)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.CantAlcanciasDevueltas)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.CantAlcanciasSinDevolver)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.TotalCampanias)
+                </td>
+                @if (item.CantAlcanciasSinDevolver > 0 && item.CantAlcanciasSinDevolver <= 5)
+                {
+                    <td id="amarillo"></td>
+                }
+                @if (item.CantAlcanciasSinDevolver == 0)
+                {
+                    <td id="verde"></td>
+                }
+                @if (item.CantAlcanciasSinDevolver > 5)
+                {
+                    <td id="rojo"></td>
+                }
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen"></i></a> |
+                    <a asp-controller="Colaborador" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-info"></i></a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

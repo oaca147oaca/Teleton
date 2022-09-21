@@ -1,0 +1,73 @@
+﻿@model Dominio.Solicitud
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="row justify-content-center align-items-center">
+    <div class="col-md-4 border" style="background-color: #454d55; padding: 10px">
+        <h4 class="text-center text-danger">Solicitud: Editar</h4>
+        @if (TempData["Status"] != null && TempData["Mensaje"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+        }
+        <hr style="border-top: 1px solid white;" />
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Campania" class="control-label text-white">Campaña</label>
+                <input asp-for="Campania.Nombre" class="form-control" disabled>
+                <span asp-validation-for="Campania.Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @* DONANTE *@
+                <label asp-for="Colaborador.Nombre" class="control-label text-white">Donante</label>
+                <input asp-for="Colaborador.Nombre" class="form-control" disabled>
+                <span asp-validation-for="Colaborador.Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @* Responsable *@
+                <label asp-for="Responsable.Nombre" class="control-label text-white">Responsable</label>
+                <input asp-for="Responsable.Nombre" class="form-control" disabled>
+                <span asp-validation-for="Responsable.Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @* Retira *@
+                <label asp-for="Retira.Nombre" class="control-label text-white">Retira</label>
+                <input asp-for="Retira.Nombre" class="form-control" disabled>
+                <span asp-validation-for="Retira.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantSolicitadas" class="control-label text-white">Solicitadas</label>
+                <input asp-for="CantSolicitadas" class="form-control" min="1" />
+                <span asp-validation-for="CantSolicitadas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-danger" />
+            </div>
+        </form>
+        <div class="align-content-end text-right">
+            <a asp-action="MostrarTodasSols" class="text-danger">Volver al listado</a>
+        </div>
+    </div>
+</div>
+
+
+

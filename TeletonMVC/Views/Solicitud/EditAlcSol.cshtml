@@ -1,0 +1,66 @@
+﻿@model Dominio.EntidadesDeNegocio.AlcanciaSolicitud
+
+@{
+    ViewData["Title"] = "EditAlcSol";
+}
+
+<div class="row justify-content-center align-items-center ">
+    <div class="col-md-4 border" style="background-color: #454d55; padding: 10px">
+        <h4 class="text-center text-danger">Editar Alcancia</h4>
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+        }
+        <hr style="border-top: 1px solid white;" />
+
+        <form asp-action="EditAlcSol">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdAlcancia" />
+            <input type="hidden" asp-for="IdSolicitud" />
+            <div class="form-group">
+                <label asp-for="NumeroTicket" class="control-label text-white">Recibo</label>
+                <input type="number" asp-for="NumeroTicket" class="form-control" min="0" />
+                <span asp-validation-for="NumeroTicket" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Impreso" class="control-label text-white"></label>
+                <input asp-for="Impreso" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label class="control-label text-white">Si desea cambiarlo</label><br />
+                <select name="SelImp" class="form-control">
+                    <option disabled selected="selected" value="0">Seleccione una opción...</option>
+                    <option value="1">Si</option>
+                    <option value="2">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MontoPesos" class="control-label text-white">Monto Pesos</label>
+                <input asp-for="MontoPesos" class="form-control" disabled />
+                <span asp-validation-for="MontoPesos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MontoDolares" class="control-label text-white">Monto Dólares</label>
+                <input asp-for="MontoDolares" class="form-control" disabled />
+                <span asp-validation-for="MontoDolares" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

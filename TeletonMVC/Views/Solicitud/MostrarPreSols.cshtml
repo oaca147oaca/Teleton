@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Dominio.Solicitud>
+
+<h1 class="text-center">Listado de Pre-Solicitudes:</h1>
+
+
+@if (TempData["Status"] != null)
+{
+
+    if ((bool)TempData["Status"] == true)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensaje"].ToString()
+        </div>
+    }
+    else if ((bool)TempData["Status"] == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Mensaje"].ToString()
+        </div>
+    }
+}
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Colaborador)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Responsable)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Retira)
+            </th>
+            <th class="text-white">
+                Solicitadas
+            </th>
+            <th class="text-white">
+                Entregadas
+            </th>
+            <th class="text-white">
+                Devueltas
+            </th>
+            <th class="text-white"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Colaborador.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Responsable.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Retira.Nombre)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.CantSolicitadas)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.CantEntregadas)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.CantDevueltas)
+                </td>
+                <td>
+                    <a asp-action="ContinuarPreSolicitud" asp-route-id="@item.Id"><i class="fa-solid fa-circle-check"></i> Seleccionar  </a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Eliminar Pre Solicitud?')"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

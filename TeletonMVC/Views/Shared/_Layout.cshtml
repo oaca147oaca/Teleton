@@ -1,0 +1,247 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor Accessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TeletonMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/e8ac4f17e6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body style="background-image: url('https://images.alphacoders.com/231/thumb-1920-231371.jpg'); background-color: #E0DECA; background-repeat: no-repeat; background-attachment: fixed; background-size: cover; ">
+    <!--https://images4.alphacoders.com/109/thumb-1920-1091476.jpg
+        https://images5.alphacoders.com/925/thumb-1920-925242.png    -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-danger border-bottom box-shadow mb-3" style="background-color: #e5e5e5 !important; ">
+            <div class="container-fluid">
+                <!-- <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TeletonMVC</a>-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ">
+
+                    @if (Accessor.HttpContext.Session.GetString("Rol") == "VoluntarioMvd" || Accessor.HttpContext.Session.GetString("Rol") == "VoluntarioFB")
+                    {
+                        <a asp-controller="Solicitud" asp-action="MostrarTodasSols">
+                            <img class="img-fluid" src="https://www.teleton.org.uy/wp-content/uploads/2014/08/logo_teleton-2.png" />
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Graficas" asp-action="Index">
+                            <img class="img-fluid" src="https://www.teleton.org.uy/wp-content/uploads/2014/08/logo_teleton-2.png" />
+                        </a>
+                    }
+
+                    <ul class="navbar-nav flex-grow-1">
+
+                        @if (Accessor.HttpContext.Session.GetString("Rol") != null)
+                        {
+                            var rol = Accessor.HttpContext.Session.GetString("Rol");
+                            var name = Accessor.HttpContext.Session.GetString("Name");
+                            var userId = Accessor.HttpContext.Session.GetInt32("UserId");
+                            TempData["NombreUsuario"] = name;
+                            TempData["UserId"] = userId;
+                            TempData["Rol"] = rol;
+                            ///ADMINISTRADOR
+                            if (rol == "Administrador")
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-danger" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-controller="Solicitud" asp-action="MostrarTodasSols">
+                                        Solicitudes
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="MostrarTodasSols">Listado Solicitudes</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="MostrarPosSols">Pos-Solicitudes</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="IrAcrearPreSol">Crear Pre-Solicitud</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="IrApreSol">Continuar Pre-Solicitud</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="IrAnewSol">Crear Solicitud</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Graficas" asp-action="Index">Gráficas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Comentario" asp-action="Index">Comentarios</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-danger" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-controller="Alcancia" asp-action="MostrarAlcancias">
+                                        Alcancías
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Alcancia" asp-action="MostrarAlcancias">Listado Alcancías</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Alcancia" asp-action="DevolucionAlcancia">Devolución</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Alcancia" asp-action="Contabilizar">Contabilizar</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="AlcanciaExternas" asp-action="Index">Alcancías Externas</a>
+                                    </div>
+                                </li>
+                                @*<li class="nav-item">
+                        <a class="nav-link text-danger" asp-area="" asp-controller="AlcanciaExternas" asp-action="Index">Alcancias Externas</a>
+                    </li>*@
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Semaforo" asp-action="Index">Semáforo</a>
+                                </li>
+                                @*<li class="nav-item">
+                        <a class="nav-link text-danger" asp-area="" asp-controller="Alcancia" asp-action="Contabilizar">Contabilizar</a>
+                    </li>*@
+                                @*<li class="nav-item">
+                        <a class="nav-link text-danger" asp-area="" asp-controller="TipoColaborador" asp-action="Index">Tipo Colaborador</a>
+                    </li>*@
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Usuario" asp-action="MostrarTodosUsus">Usuarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Campania" asp-action="Index">Campañas</a>
+                                </li>
+                                @*<li class="nav-item">
+                        <a class="nav-link text-danger" asp-area="" asp-controller="Colaborador" asp-action="MostrarTodosCols">Colaboradores</a>
+                    </li>*@
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-danger" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-controller="Colaborador" asp-action="MostrarTodosCols">
+                                        Donantes
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Colaborador" asp-action="MostrarTodosCols">Listado Donantes</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="TipoColaborador" asp-action="Index">Tipos Donantes</a>
+                                    </div>
+                                </li>
+                            }
+
+                            ///CONTABILIDAD
+                            if (rol == "Contabilidad")
+                            {
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Usuario" asp-action="CambioContrasenia">Cambio Contraseña</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-danger" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-controller="Alcancia" asp-action="MostrarAlcancias">
+                                        Alcancías
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Alcancia" asp-action="MostrarAlcancias">Listado Alcancías</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Alcancia" asp-action="Contabilizar">Contabilizar</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="AlcanciaExternas" asp-action="Index">Alcancías Externas</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Solicitud" asp-action="MostrarPosSols">Solicitudes</a>
+                                </li>
+                            }
+
+                            ///SUPERVISORES DE VOLUNTARIOS
+                            if (rol == "Voluntariado")
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-danger" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-controller="Solicitud" asp-action="MostrarTodasSols">
+                                        Solicitudes
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="MostrarTodasSols">Listado Solicitudes</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="MostrarPosSols">Pos-Solicitudes</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="IrAcrearPreSol">Crear Pre-Solicitud</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="IrApreSol">Continuar Pre-Solicitud</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Solicitud" asp-action="IrAnewSol">Crear Solicitud</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Usuario" asp-action="CambioContrasenia">Cambio Contraseña</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Comentario" asp-action="Index">Comentarios</a>
+                                </li>
+                                //Menú hamb
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-danger" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-controller="Alcancia" asp-action="MostrarAlcancias">
+                                        Alcancías
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Alcancia" asp-action="MostrarAlcancias">Listado Alcancías</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="Alcancia" asp-action="DevolucionAlcancia">Devolución</a>
+                                        <a class="dropdown-item text-danger" asp-area="" asp-controller="AlcanciaExternas" asp-action="Index">Alcancías Externas</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Usuario" asp-action="AuditoriaVoluntarios">Voluntarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Semaforo" asp-action="Index">Semáforo</a>
+                                </li>
+                            }
+
+                            ///VOLUNTARIOS
+                            if (rol == "VoluntarioFB" || rol == "VoluntarioMvd")
+                            {
+                                if (Accessor.HttpContext.Session.GetInt32("VoluntarioId") != null)
+                                {
+                                    <li class="nav-item ">
+                                        <a class="nav-link text-danger" asp-area="" asp-controller="Alcancia" asp-action="DevolucionAlcancia">Devolución</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-danger" asp-area="" asp-controller="Solicitud" asp-action="MostrarTodasSols">Solicitud</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-danger" asp-area="" asp-controller="AlcanciaExternas" asp-action="Create">Devolución Alcancía Externa</a>
+                                    </li>
+                                }
+                            }
+
+
+                            @*<li class="nav-item d-flex justify-content-end ">
+                    @{
+                        var nombre = Accessor.HttpContext.Session.GetString("Nombre");
+                        var rolId = Accessor.HttpContext.Session.GetInt32("UserId").GetValueOrDefault();
+
+                        <a class="nav-link text-danger ">@nombre</a>
+                    }
+                </li>*@
+                            @if (rol == "Administrador")
+                            {
+                                <li class="nav-item d-flex justify-content-end align-content-end text-right">
+                                    <a class="nav-link text-danger" asp-area="" asp-controller="Usuario" asp-action="Details"
+                                       asp-route-id="@TempData["UserId"]">
+                                        Hola @TempData["NombreUsuario"].ToString()! (@TempData["Rol"].ToString())
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item d-flex text-right text-danger">
+                                    <a class="nav-link text-danger">
+                                        Hola @TempData["NombreUsuario"].ToString()!
+                                    </a>
+                                </li>
+                            }
+                            <li class="nav-item d-flex justify-content-end align-content-end text-right">
+                                <a class="nav-link text-danger " asp-area="" asp-controller="Usuario" asp-action="CierreSesion" onclick="return confirm('Desea cerrar sesión?')">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted bg-danger navbar-dark" style="background-color: #e5e5e5 !important">    
+        <div class="container">
+            <div class="justify-content-end">
+                <a class="text-danger "> &copy; 2022 - Teleton -Tels: (598) 2304-3620 • (598) 2304-3622 • (598) 4562 1910</a>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

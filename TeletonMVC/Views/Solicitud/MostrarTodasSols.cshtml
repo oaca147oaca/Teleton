@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Dominio.Solicitud>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor Accessor
+
+@{
+    ViewData["Title"] = "MostrarTodasSols";
+}
+
+
+@if (Accessor.HttpContext.Session.GetString("Rol") != null)
+{
+    var rol = Accessor.HttpContext.Session.GetString("Rol");
+
+
+    if (rol == "VoluntarioFB" || rol == "VoluntarioMvd")
+    {
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-md-4">
+                <h4 class="text-center">Solicitudes</h4>
+
+                @if (TempData["Status"] != null)
+                {
+
+                    if ((bool)TempData["Status"] == true)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @TempData["Mensaje"].ToString()
+                        </div>
+                    }
+                    else if ((bool)TempData["Status"] == false)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Mensaje"].ToString()
+                        </div>
+                    }
+                }
+                <hr />
+                <div class="container align-content-end text-left">
+                    @using (Html.BeginForm("ElegirSolicitud", "Solicitud"))
+                    {
+                        @Html.RadioButton("valor", "1", true) <label>Crear nueva solicitud </label>
+                        <br />
+                        @Html.RadioButton("valor", "2") <label>Seguir con Pre-Solicitud</label>
+                        <br />
+                        <input type="submit" value="Siguiente" class="btn btn-danger" />
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+
+
+    if (rol != "VoluntarioFB" && rol != "VoluntarioMvd")
+    {
+        <h1 class="text-center">Listado de Solicitudes</h1>
+
+
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"]
+                </div>
+            }
+            else if (ViewBag.Status == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"]
+                </div>
+            }
+        }
+        <input type="text" id="myInput" placeholder="Filtrar..." class="form-control"/><br />
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th class="text-white">
+                        Donante
+                    </th>
+                    <th class="text-white">
+                        @Html.DisplayNameFor(model => model.Responsable)
+                    </th>
+                    <th class="text-white">
+                        @Html.DisplayNameFor(model => model.Retira)
+                    </th>
+                    <th class="text-white">
+                        Solicitadas
+                    </th>
+                    <th class="text-white">
+                        Entregadas
+                    </th>
+                    <th class="text-white">
+                        Devueltas
+                    </th>
+                    <th class="text-white"></th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-controller="Colaborador" asp-route-id="@item.Colaborador.Id">
+                                @Html.DisplayFor(modelItem => item.Colaborador.Nombre)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Responsable.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Retira.Nombre)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.CantSolicitadas)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.CantEntregadas)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.CantDevueltas)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen"></i> </a>|
+                            <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-info"></i> </a>|
+                            <a asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Eliminar solicitud? Se borrarán los registros relacionados a esta Solicitud')"><i class="fa-solid fa-trash-can"></i> </a>|
+                            <a asp-controller="Colaborador" asp-action="Details" asp-route-id="@item.Colaborador.Id">Donante </a>|
+                            <a asp-action="Imprimir" asp-route-id="@item.Id"> <i class="fa-solid fa-print"></i> Entrega</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+}
+
+
+<script src="~/js/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

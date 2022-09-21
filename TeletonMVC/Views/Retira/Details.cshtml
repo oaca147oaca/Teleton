@@ -1,0 +1,17 @@
+﻿@model Dominio.Retira
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+
+<div class="container">
+    <h4 class="text-center">Retira: Detalles</h4>
+    <div class="p-3 mb-2 bg-secondary text-white">Nombre: @Html.DisplayFor(model => model.Nombre)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Cedula: @Html.DisplayFor(model => model.Cedula)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Telefono: @Html.DisplayFor(model => model.Telefono)</div>
+    <div class="align-content-end text-right">
+        <a asp-action="Edit" asp-route-id="@Model.Id"><i class="fa-solid fa-pen"></i></a> |
+        <a asp-action="Index">Volver a la lista</a>
+    </div>
+</div>

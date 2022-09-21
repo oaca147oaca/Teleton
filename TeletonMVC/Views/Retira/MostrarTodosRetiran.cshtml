@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Dominio.Retira>
+
+@{
+    ViewData["Title"] = "Todos retiran";
+}
+
+<h1 class="text-center">Listado que Retiran</h1>
+
+<p class="align-content-end text-right">>
+    <a asp-action="AltaRetira">Crear nuevo</a>
+</p>
+
+@if (TempData["Status"] != null)
+{
+
+    if ((bool)TempData["Status"] == true)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensaje"].ToString();
+        </div>
+    }
+    else if ((bool)TempData["Status"] == false)
+    {
+        <div class="alert alert-danger" role="alert">
+           @TempData["Mensaje"].ToString();
+        </div>
+    }
+}
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Cedula)
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th class="text-white"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-info"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Eliminar Datos del que Retira @item.Nombre ? Recuerde que si tiene alguna solicitud asignada, se borrará también. Sino, pruebe Editarlo.')"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

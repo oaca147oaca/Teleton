@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Dominio.Responsable>
+
+@{
+    ViewData["Title"] = "VerResponsablesDeCol";
+}
+
+<h1 class="text-center">Listado de Responsables del Donante Seleccionado</h1>
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="text-white">
+                Cédula
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th class="text-white">
+                Teléfono
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Retira)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Retira)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

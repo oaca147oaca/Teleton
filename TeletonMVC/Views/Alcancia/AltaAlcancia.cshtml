@@ -1,0 +1,51 @@
+﻿@model Dominio.Alcancia
+
+@{
+    ViewData["Title"] = "Alta de alcancias";
+}
+
+<div class="row justify-content-center align-items-center ">
+    <div class="col-md-4 border">
+        <h3 class="text-center">Alcancía: Crear</h3>
+
+        @if (ViewBag.Status != null)
+        {
+
+            if (ViewBag.Status == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.Mensaje
+                </div>
+            }
+            else if (ViewBag.Status == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.Mensaje
+                </div>
+            }
+        }
+        <hr />
+        <form asp-action="AltaAlcancia">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Código Alcancia</label>
+                <input asp-for="IdAlcancia" class="form-control" type="number" pattern="^[0-9]{1,12}([,][0-9]{2,2})?$" autofocus value="" min="0"/>
+                <span asp-validation-for="IdAlcancia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ingresar" class="btn btn-danger" />
+            </div>
+        </form>
+        <div>
+            <a asp-action="MostrarAlcancias" class="text-right">Volver a la Lista</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

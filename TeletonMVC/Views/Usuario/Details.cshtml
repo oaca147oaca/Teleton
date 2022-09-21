@@ -1,0 +1,17 @@
+﻿@model Dominio.Usuario
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+   
+<div class="container">
+    <h4 class="text-center">Usuario: Detalles</h4>
+    <div class="p-3 mb-2 bg-secondary text-white">Nombre: @Html.DisplayFor(model => model.Nombre)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Nombre de Rol: @Html.DisplayFor(model => model.Rol.Nombre)</div>
+
+    <div class="align-content-end text-right">
+        <a asp-action="MostrarTodosUsus">Volver al Listado</a>
+    </div>
+</div>

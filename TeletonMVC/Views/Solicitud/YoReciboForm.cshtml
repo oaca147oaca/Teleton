@@ -1,0 +1,13 @@
+﻿
+@if (TempData["Mensaje"] != null){
+<div class="alert alert-success" role="alert">
+    @TempData["Mensaje"].ToString()
+</div>
+}
+
+<form asp="YoReciboForm">
+    <input type="number" name="id" id="id" placeholder="Escanée la alcancía" />
+    <input type="submit" value="Agregar" class="btn btn-primary" onclick="location.href='@Url.Action("YoReciboForm", "Solicitud", "#id")'"/>
+</form>
+
+

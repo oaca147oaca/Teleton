@@ -1,0 +1,66 @@
+﻿@model Dominio.Responsable
+
+@{
+    ViewData["Title"] = "Crear responsable";
+}
+
+
+<h4 style="color:dimgray" class="text-center">
+    <b style="color:darkgreen">Asignar Donante <i class="fa-solid fa-arrow-right"></i></b>
+    <b style="color:black">Asignar Responsable</b>  <i class="fa-solid fa-arrow-right"></i>
+    Asignar Retira<i class="fa-solid fa-arrow-right"></i>
+    Finalizar Solicitud
+</h4>
+
+
+<div class="row justify-content-center align-items-center ">
+    <div class="col-md-4 border">
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"].ToString()
+                </div>
+            }
+        }
+        <hr />
+        <form asp-action="AltaResponsable">
+            <div class="form-group">
+
+                <h2>Buscar responsable ya existente</h2>
+
+                @if (ViewBag.Resp.Count == 0)
+                {
+                    <label>No hay responsables registrados actualmente</label>
+                }
+                else
+                {
+                    <input type="text" list="cols" name="SelResp" class="form-control" placeholder="Buscar responsable..." autocomplete="off" />
+                    <datalist id="cols">
+                        @for (int i = 0; i < ViewBag.Resp.Count; i++)
+                        {
+                            <option value="@ViewBag.Resp[i].Id">@ViewBag.Resp[i].Nombre</option>
+                        }
+                    </datalist>
+                }
+                <br />
+                <input type="submit" value="Siguiente" class="btn btn-danger" />
+            </div>
+            <a asp-action="AltaResponsablePaso" class="btn btn-danger">Crear responsable</a>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

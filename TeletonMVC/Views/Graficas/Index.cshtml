@@ -1,0 +1,55 @@
+﻿
+<h2 class="text-center">Datos Campaña actual @ViewBag.CampAct.FechaInicio.ToString("yyyy")</h2>
+<br />
+
+<div class="container" style="width:1200px">
+    <div id="container2" style="width:38%; float:left;"></div>
+
+    <div id="datosSueltos" style="width:22%; display:inline-block; margin: 0px 0px 0px 10px">
+        <div class="p-3 mb-2 bg-danger " style="border-radius: 20px;">
+            Solicitadas en Montevideo:
+            <p class="text-center justify-content-center" style="font-size: larger; margin-bottom: -5px">
+                @ViewBag.CantSolMVD
+            </p>
+        </div>
+        <div class="p-3 mb-2 bg-danger" style="border-radius: 20px; background-color: aquamarine">
+            Entregadas en Montevideo:
+            <p class="text-center justify-content-center" style="font-size: larger; margin-bottom: -5px">
+                @ViewBag.CantAlcMVD
+            </p>
+        </div>
+        <div class="p-3 mb-2 bg-success" style="border-radius: 20px;">
+            Solicitadas en Fray Bentos:
+            <p class="text-center justify-content-center" style="font-size: larger; margin-bottom: -5px">
+                @ViewBag.CantSolFB
+            </p>
+        </div>
+        <div class="p-3 mb-2 bg-success" style="border-radius: 20px;">
+            Entregadas en Fray Bentos:
+            <p class="text-center justify-content-center" style="font-size: larger; margin-bottom: -5px">
+                @ViewBag.CantAlcFB
+            </p>
+        </div>
+    </div>
+
+    <div id="container" style="width:38%; float:right; "></div>
+</div>
+
+
+@section Scripts{
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <LINK href="~/css/graficas.css" rel="stylesheet" type="text/css">
+    <script>
+       var urlBase = "https://" + "@Context.Request.Host"
+
+    </script>
+
+    <script src="~/js/Barras1.js"></script>
+    <script src="~/js/Barras2.js"></script>
+
+}

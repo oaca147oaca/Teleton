@@ -1,0 +1,67 @@
+﻿@model Dominio.Retira
+
+@{
+    ViewData["Title"] = "Crear retira";
+}
+
+<h4 style="color:dimgray" class="text-center">
+    <b style="color:darkgreen">
+        Asignar Donante <i class="fa-solid fa-arrow-right"></i>
+        Asignar Responsable  <i class="fa-solid fa-arrow-right"></i>
+    </b>
+    <b style="color:black">
+        Crear Retira<i class="fa-solid fa-arrow-right"></i>
+    </b>
+    Finalizar Solicitud
+</h4>
+
+<hr />
+
+<div class="row justify-content-center align-items-center ">
+    <div class="col-md-4 border">
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"]
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"]
+                </div>
+            }
+        }
+        <hr />
+        <form asp-action="AltaRetiraPasos">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cedula" class="control-label">Cédula</label>
+                <input asp-for="Cedula" class="form-control" />
+                <span asp-validation-for="Cedula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label">Teléfono</label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

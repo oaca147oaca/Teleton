@@ -1,0 +1,51 @@
+﻿@model TeletonMVC.Models.CambioModel
+
+@{
+    ViewData["Title"] = "CambioContrasenia";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col-md-4 border">
+        <h4>Usuario: Cambio Contraseña</h4>
+        @if (ViewBag.Status != null)
+        {
+
+            if (ViewBag.Status == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.Mensaje
+                </div>
+            }
+            else if (ViewBag.Status == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.Mensaje
+                </div>
+            }
+        }
+        <hr />
+        <form asp-action="CambioContrasenia">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Contraseña:</label>
+                <input asp-for="Contrasenia" class="form-control" />
+                <span asp-validation-for="Contrasenia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Contraseña Nueva:</label>
+                <input asp-for="ContraseniaNueva" class="form-control" />
+                <span asp-validation-for="ContraseniaNueva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Confirmar Contraseña:</label>
+                <input asp-for="ContraseniaConfir" class="form-control" />
+                <span asp-validation-for="ContraseniaConfir" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cambiar" class="btn btn-outline-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

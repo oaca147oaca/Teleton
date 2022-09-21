@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Dominio.EntidadesDeNegocio.AlcanciaSolicitud>
+
+@{
+    ViewData["Title"] = "MostrarAlcanciasDeSol";
+}
+
+<h1 class="text-center">Mostrar Alcancías de Solicitud Seleccionada</h1>
+@if (TempData["Status"] != null)
+{
+
+    if ((bool)TempData["Status"] == true)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensaje"].ToString()
+        </div>
+    }
+    else if ((bool)TempData["Status"] == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Mensaje"].ToString()
+        </div>
+    }
+}
+
+<table class="table table-dark table-hover text-center">
+    <thead>
+        <tr>
+            <th class="text-white">
+                Alcancía
+            </th>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Solicitud)
+            </th>
+            <th class="text-white">
+                N° Recibo
+            </th>
+            <th class="text-white">
+                Monto Pesos
+            </th>
+            <th class="text-white">
+                Monto Dolares
+            </th>   
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr >
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alcancia.IdAlcancia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Solicitud.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroTicket)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoPesos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoDolares)
+                </td>
+                <td>
+                    <a asp-action="EditAlcSol" asp-controller="Solicitud" asp-route-id="@item.Alcancia.IdAlcancia"><i class="fa-solid fa-pen"></i></a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

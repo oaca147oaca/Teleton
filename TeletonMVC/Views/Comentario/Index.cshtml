@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Dominio.Solicitud>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Comentarios: Lista de Solicitudes</h1>
+<input type="text" id="myInput" placeholder="Filtrar..." class="form-control" />
+<br />
+
+
+@if (TempData["Status"] != null)
+{
+    if ((bool)TempData["Status"] == true)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensaje"].ToString()
+        </div>
+    }
+    else if ((bool)TempData["Status"] == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Mensaje"].ToString()
+        </div>
+    }
+}
+@if (ViewBag.Sols.Count == 0)
+{
+
+    <p class="text-center">No hay devoluciones de alcancías pendientes en este momento.</p>
+
+}
+else
+{
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th class="text-white">
+                    Colaborador
+                </th>
+                <th class="text-white">
+                    Responsable
+                </th>
+                <th class="text-white">
+                    Entregadas
+                </th>
+                <th class="text-white">
+                    Devueltas
+                </th>
+                <th class="text-white">
+                    Telefono
+                </th>
+                <th class="text-white">
+                    Correo
+                </th>
+                <th class="text-white"></th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+
+            @foreach (var item in ViewBag.Sols)
+            {
+                <tr>
+                    <td>
+                        @item.Colaborador.Nombre
+                    </td>
+                    <td>
+                        @item.Responsable.Nombre
+                    </td>
+                    <td>
+                        @item.CantEntregadas
+                    </td>
+                    <td>
+                        @item.CantDevueltas
+                    </td>
+                    <td>
+                        @item.Responsable.Telefono
+                    </td>
+                    <td>
+                        @item.Responsable.Correo
+                    </td>
+                    <td>
+                        <a asp-action="Comentarios" asp-route-id="@item.Id">Ver Comentarios</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+
+<script src="~/js/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

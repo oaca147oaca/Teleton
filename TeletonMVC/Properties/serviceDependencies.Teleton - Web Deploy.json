@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/teletonmvcdbserver/databases/TeletonMVC_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:Server=tcp:alcancias.database.windows.net,1433;InitialCatalog=AlcanciasBD;PersistSecurityInfo=False;UserID=teleton;Password=Telet@n_2022;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

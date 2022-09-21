@@ -1,0 +1,155 @@
+﻿@model Dominio.Solicitud
+
+@{
+    Layout = null;
+}
+
+
+@functions{
+    public string GetSol()
+    {
+        ViewBag.Solicitud = (Dominio.Solicitud)TempData["Solicitud"];
+        ViewBag.Fecha = DateTime.Today.Year;
+        return string.Empty;
+    }
+}
+
+<style>
+    h1 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 15px;
+        margin: 5px;
+    }
+
+    .listado {
+        border: 1px solid black;
+        width: 100%;
+        margin-bottom: 10px
+    }
+</style>
+
+
+
+
+
+<div id="divImprimir1" style="margin-left:10px; margin-top:0px;">
+    @GetSol()
+
+    <h1><b>ENTREGA DE ALCANCÍAS TELETÓN @ViewBag.Fecha</b></h1>
+
+    <p>Por este medio solicito a la Fundación Teletón alcancías, con el único fin de colaborar, durante la campaña <b>@ViewBag.Fecha</b>.</p></br>
+    <p>Fecha: @DateTime.Now.ToString("dd/MM/yyyy")</p> </br>
+
+    <h2>DATOS DE LA ENTREGA: </h2>
+    <p><b>@ViewBag.Solicitud.Colaborador.TipoCol.Nombre</b>: @ViewBag.Solicitud.Colaborador.Nombre</p>
+    <p><b>Dirección</b>: @ViewBag.Solicitud.Colaborador.Direccion </p></br>
+
+    <p><b>RESPONBSABLE:</b></p>
+
+    <p><b>Nombre</b>: @ViewBag.Solicitud.Responsable.Nombre</p>
+    <p><b>Cédula</b>: @ViewBag.Solicitud.Responsable.Cedula</p>
+    <p><b>E-Mail</b>: @ViewBag.Solicitud.Responsable.Correo</p>
+    <p><b>Teléfono</b>: @ViewBag.Solicitud.Responsable.Telefono</p></br>
+
+    <p><b>QUIEN RETIRA:</b></p>
+    <p><b>Nombre</b>: @ViewBag.Solicitud.Retira.Nombre</p>
+    <p><b>Cédula</b>: @ViewBag.Solicitud.Retira.Cedula</p>
+    <p><b>Teléfono</b>: @ViewBag.Solicitud.Retira.Telefono </p></br>
+
+    <p><b>ALCANCÍAS:</b></p>
+    <p><b>Cantidad:</b> @ViewBag.Solicitud.Alcancias.Count</p>
+
+    @for (int i = 0; i < ViewBag.Solicitud.Alcancias.Count; i++)
+    {
+        if (ViewBag.Solicitud.Alcancias.Count - 1 != i)
+        {
+            ViewBag.alc += ViewBag.Solicitud.Alcancias[i].IdAlcancia + ", ";
+        }
+        else
+        {
+            ViewBag.alc += ViewBag.Solicitud.Alcancias[i].IdAlcancia + ".";
+        }
+    }
+
+
+
+
+    <p><b>CÓDIGOS DE LA(S) ALCANCÍA(S)</b>: @ViewBag.alc</p><b>
+        </br></br>
+
+        <p>
+            <b>
+                La(s) alcancía(s) son propiedad única y exclusiva de la Fundación Teletón. La no devolucion de la(s) misma(s) en los plazos estipulados hará incurrir al
+                responsable en el delito de apropiación indebida previsto en el art. 351 del Código Penal.
+            </b>
+        </p></br></br>
+
+        <p>
+            <b>
+                El firmante se hace responsable del buen uso y cuidado de la alcancía, y de su devolución en tiempo y forma, respetando los procedimientos
+                y las fechas de devolución establecidas en el documento entregado en este mismo acto.
+            </b>
+        </p>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+        <p><b>FIRMA:_____________________          ACLARACIÓN:_____________________</b></p><br /><br /><br /> <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+        <h1><b>ENTREGA DE ALCANCÍAS TELETÓN @ViewBag.Fecha</b></h1>
+
+        <p>Fecha: @DateTime.Now.ToString("dd/MM/yyyy")</p>
+        <p>Cantidad de alcancías: @ViewBag.Solicitud.Alcancias.Count</p>
+        <p>Entregadas a: <b>@ViewBag.Solicitud.Retira.Nombre</b> </p></br>
+
+        <p>Alcancías de Montevideo</p>
+        <p>- El día  @ViewBag.Solicitud.Campania.FechaFinMVD.ToString("dd/MM/yyyy"), en el Centro Teletón de Montevideo</p>
+
+        <p>Alcancías de FrayBentos</p>
+        <p>- El día  @ViewBag.Solicitud.Campania.FechaFinFB.ToString("dd/MM/yyyy"), en el Centro Teletón de Fray Bentos</p>
+
+
+        <h2><b>Alcancías del resto del país y empresas autorizadas</b></h2>
+        <ul>
+            <li><b>EN ABITAB:</b></li>
+            <ul>Abrir y contar el dinero en el momento de realizar el depósito </ul>
+            <ul>Enviar el comprobante en ABITAB a <b>alcancias@teleton.org.uy</b> indicando el número del código de barras que figura en la alcancía. En el caso de tener más de una, indicar el número de unas sola (cualquiera) de ellas. </ul>
+            </br>
+            <li>
+                <b>
+                    La(s) alcancía(s) son propiedad única y exclusiva de la Fundación Teletón. La no devolución de la(s) misma(s) en los plazos estipulados hará incurrir al
+                    responsable en el delito de apropiación indebida previsto en el art. 351 del Código Penal. Por ello deben enviarse de inmediatamente al centro Teletón Montevideo (Av. Carlos Brussa 2854) y/o centro Teletón Fray Bentos (Juan Zorrilla 1484).
+                </b>
+            </li>
+        </ul>
+
+        <p>Por cualquier duda o consulta, comunicarse al teléfono 23043620</p>
+
+        <h2><b>ATENCIÓN:</b></h2>
+        <p><b>- NO REMOVER LAS ETIQUETAS</b></p>
+
+        <p>Utilice el siguiente listado para el seguimiento de las alacancías que Ud. retiró, detallando al lado de cada número el lugar donde fue entregada esa alcancía, y/o cualquier otra información que le sea de ayuda para el control de su devolución a Teletón</p>
+
+
+        @foreach (var alc in ViewBag.Solicitud.Alcancias)
+        {
+            string lista = "<div style='border-line=1px solid black'>" + alc.IdAlcancia + "</div></br>";
+            <div class="listado">@alc.IdAlcancia</div>
+
+        }
+
+
+</div>

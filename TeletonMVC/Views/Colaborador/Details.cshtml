@@ -1,0 +1,22 @@
+﻿@model Dominio.Colaborador
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="container">
+    <h4 class="text-center">Donante: Detalles</h4>
+    <div class="p-3 mb-2 bg-secondary text-white">Nombre: @Html.DisplayFor(model => model.Nombre)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Razon Social: @Html.DisplayFor(model => model.RazonSocial)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Dirección: @Html.DisplayFor(model => model.Direccion)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Departamento: @Html.DisplayFor(model => model.Departamento)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Localidad: @Html.DisplayFor(model => model.Localidad)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Tipo Donador: @Html.DisplayFor(model => model.TipoCol.Nombre)</div>
+    <div class="align-content-end text-right">
+        <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+        <a asp-action="Index">Volver al Listado</a> |
+        <a asp-controller="Solicitud" asp-action="MostrarTodasSols">Listado Solicitudes</a>
+    </div>
+</div>
+

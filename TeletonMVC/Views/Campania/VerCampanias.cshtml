@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Dominio.Campania>
+
+@{
+    ViewData["Title"] = "VerCampanias";
+}
+
+<h1 class="text-center">Listado de Campañas</h1>
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th class="text-white">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="text-white">
+                Fecha Inicio
+            </th>
+            <th class="text-white">
+                Fecha Fin Montevideo
+            </th>
+            <th class="text-white">
+                Fecha Fin Fray Bentos
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.ValueFor(modelItem => item.FechaInicio, "{0:dd/MM/yyyy}")
+            </td>
+            <td>
+                @Html.ValueFor(modelItem => item.FechaFinMVD, "{0:dd/MM/yyyy}")
+            </td>
+            <td>
+                @Html.ValueFor(modelItem => item.FechaFinFB, "{0:dd/MM/yyyy}")
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

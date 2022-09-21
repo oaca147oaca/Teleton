@@ -1,0 +1,18 @@
+﻿@model Dominio.Alcancia
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container">
+    <h4 class="text-center">Alcancía: Detalles</h4>
+    <div class="p-3 mb-2 bg-secondary text-white">Estado: @Html.DisplayFor(model => model.Estado)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Fecha Alta: @Html.DisplayFor(model => model.FechaAlta)</div>
+    <div class="p-3 mb-2 bg-secondary text-white">Habilitada: @Html.DisplayFor(model => model.Habilitada)</div>
+
+    <div class="align-content-end text-right">      
+        <a asp-action="MostrarAlcancias">Volver al listado </a>|
+        <a asp-action="Edit" asp-route-id="@Model.IdAlcancia">Editar</a>
+    </div>
+</div>
+

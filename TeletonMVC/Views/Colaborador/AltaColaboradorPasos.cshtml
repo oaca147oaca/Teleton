@@ -1,0 +1,85 @@
+﻿@model Dominio.Colaborador
+
+@{
+    ViewData["Title"] = "Crear Donador";
+}
+
+<h4 style="color:dimgray" class="text-center">
+    <b style="color:black">Crear Donante <i class="fa-solid fa-arrow-right"></i></b>
+    Asignar Responsable <i class="fa-solid fa-arrow-right"></i>
+    Asignar Retira<i class="fa-solid fa-arrow-right"></i>
+    Finalizar Solicitud
+</h4>
+
+<div class="row justify-content-center align-items-center ">
+    <div class="col-md-4 border">
+        @if (TempData["Status"] != null)
+        {
+
+            if ((bool)TempData["Status"] == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Mensaje"]
+                </div>
+            }
+            else if ((bool)TempData["Status"] == false)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Mensaje"]
+                </div>
+            }
+        }
+        <hr />
+        <form asp-action="AltaColaboradorPasos">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <label asp-for="TipoColId" class="control-label">Tipo de Donante</label>
+
+            <select name="SelTipoCol" class="form-control" autofocus id="Seleccionaso">
+                <option disabled selected="selected">Seleccione una opción</option>
+                @for (int i = 0; i < ViewBag.TiposCols.Count; i++)
+                {
+                    <option value="@ViewBag.TiposCols[i].Id">@ViewBag.TiposCols[i].Nombre</option>
+                }
+            </select>
+
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"> </label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="razonDiv" style="display:none;">
+                <label asp-for="RazonSocial" class="control-label">Razón Social</label>
+                <input asp-for="RazonSocial" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label">Dirección</label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div>
+                <label class="control-label">Departamento</label>
+                <select name="SelDept" class="form-control" autofocus>
+                    @for (int i = 0; i < ViewBag.Departamentos.Count; i++)
+                    {
+                        <option value="@ViewBag.Departamentos[i]">@ViewBag.Departamentos[i]</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Localidad" class="control-label"></label>
+                <input asp-for="Localidad" class="form-control" />
+                <span asp-validation-for="Localidad" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/jquery/jquery.min.js"></script>
+    <script src="~/js/RazonSocialFiltro.js"></script>
+}
