@@ -19,6 +19,7 @@ using Dominio.EntidadesDeNegocio;
 
 namespace GestionAlcancias.Controllers
 {
+    //Hola se actualizar
     public class UsuarioController : Controller
     {
 
