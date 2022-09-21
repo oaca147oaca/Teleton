@@ -19,7 +19,7 @@ using Dominio.EntidadesDeNegocio;
 
 namespace GestionAlcancias.Controllers
 {
-    //Hola se actualizar
+    
     public class UsuarioController : Controller
     {
 
@@ -28,7 +28,7 @@ namespace GestionAlcancias.Controllers
         private readonly IConfiguration _configuration;
         private readonly HttpClient ApiClient;
 
-
+//Hola se actualizar
         public UsuarioController(ILogger<UsuarioController> logger, MiAppContext dbContext, IConfiguration configuration)
         {
             _logger = logger;
